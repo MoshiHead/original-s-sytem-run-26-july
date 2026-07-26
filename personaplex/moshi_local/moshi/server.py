@@ -401,7 +401,7 @@ class ContextCompressor:
                 logger.warning("[compressor] quantize_4bit requested but device=cpu — falling back to fp32 on CPU.")
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_name,
-                dtype=torch.float16 if device != "cpu" else torch.float32,   # `dtype`, not `torch_dtype` — see below
+                torch_dtype=torch.float16 if device != "cpu" else torch.float32,
                 device_map=device, **common_kwargs,
             )
         self.model.eval()
